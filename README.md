@@ -143,13 +143,21 @@ Plus: loading/pending spinners during submission, trustline errors ([`useTrustli
 
 ## 🖼️ Screenshots
 
-| Screenshot | File | Status |
-| :--- | :--- | :--- |
-| Desktop Homepage | [`screenshots/desktop_homepage.png`](screenshots/desktop_homepage.png) | ✅ present |
-| Mobile Dashboard | [`screenshots/mobile_dashboard.png`](screenshots/mobile_dashboard.png) | ✅ present |
-| Mobile Swap Interface | [`screenshots/mobile_swap.png`](screenshots/mobile_swap.png) | ✅ present |
-| Mobile Liquidity Pool | [`screenshots/mobile_pool.png`](screenshots/mobile_pool.png) | ✅ present |
-| Walkthrough Demonstration | [`screenshots/demo.gif`](screenshots/demo.gif) | ✅ present |
+### Desktop Homepage
+
+![Desktop Homepage](./screenshots/desktop_homepage.png)
+
+### Mobile — Dashboard · Swap · Liquidity Pool
+
+<p align="center">
+  <img src="./screenshots/mobile_dashboard.png" alt="Mobile Dashboard" width="32%" />
+  <img src="./screenshots/mobile_swap.png" alt="Mobile Swap" width="32%" />
+  <img src="./screenshots/mobile_pool.png" alt="Mobile Liquidity Pool" width="32%" />
+</p>
+
+### Walkthrough Demo
+
+![SecureStream walkthrough demo](./screenshots/demo.gif)
 
 ---
 
