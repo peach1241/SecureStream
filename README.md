@@ -160,6 +160,14 @@ Plus: loading/pending spinners during submission, trustline errors ([`useTrustli
 
 ![SecureStream walkthrough demo](./screenshots/demo.gif)
 
+### CI/CD Pipeline (passing)
+
+![CI/CD pipeline passing](./screenshots/ci_passing.png)
+
+### Contract Tests (17 passing)
+
+![Soroban contract tests passing](./screenshots/test_output.png)
+
 ---
 
 ## 🚦 Setup Instructions
