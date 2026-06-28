@@ -1,0 +1,12 @@
+# Cloudflare Workers (static assets) deployment for the SecureStream frontend.
+# The dashboard build command runs `cd frontend && npm install && npm run build`,
+# which produces the static export in ./frontend/out. `npx wrangler deploy`
+# then uploads that directory as a static-assets Worker.
+#
+# NOTE: leave the dashboard "Build command" as-is and do NOT add a [build]
+# block here, to avoid running the build twice.
+name = "securestream"
+compatibility_date = "2026-06-25"
+
+[assets]
+directory = "./frontend/out"
