@@ -1,5 +1,6 @@
 'use client';
 import useSWR from 'swr';
+import { fetchEvents } from '@/lib/stellarReads';
 
 export interface ContractEvent {
   id: string;
@@ -13,11 +14,9 @@ export interface ContractEvent {
 }
 
 export const useContractEvents = () => {
-  const { data, error, isLoading } = useSWR(
-    '/api/events',
-    (url) => fetch(url).then((res) => res.json()),
-    { refreshInterval: 2000 }
-  );
+  const { data, error, isLoading } = useSWR('contract-events', fetchEvents, {
+    refreshInterval: 5000,
+  });
 
   return {
     events: (data?.events as ContractEvent[]) || [],

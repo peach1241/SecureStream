@@ -2,6 +2,7 @@
 import useSWR from 'swr';
 import { useState } from 'react';
 import { signTransaction } from '@stellar/freighter-api';
+import { fetchBalances } from '@/lib/stellarReads';
 
 const HORIZON_URL = process.env.NEXT_PUBLIC_HORIZON_URL || 'https://horizon-testnet.stellar.org';
 const NETWORK_PASSPHRASE = 'Test SDF Network ; September 2015'; // Networks.TESTNET
@@ -9,8 +10,8 @@ const SST_ISSUER = process.env.NEXT_PUBLIC_SST_ISSUER || '';
 
 export const useTrustline = (publicKey: string) => {
   const { data, mutate, isLoading } = useSWR(
-    publicKey ? `/api/balance/${publicKey}` : null,
-    (url: string) => fetch(url).then((res) => res.json()),
+    publicKey ? ['balances', publicKey] : null,
+    ([, pk]: [string, string]) => fetchBalances(pk),
     { refreshInterval: 5000 }
   );
 

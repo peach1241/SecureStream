@@ -45,13 +45,14 @@ graph TD
     Bridge -->|env.invoke_contract: swap| Pool
     Bridge -->|env.invoke_contract: transfer| Token
 
-    subgraph "Frontend (Next.js 14)"
+    subgraph "Frontend (Next.js 14 — static export)"
         UI[App Router pages]
-        API[API routes: /price /events /pool /balance]
+        Reads[lib/stellarReads: client-side reads]
     end
 
-    UI -->|SWR 2s polling| API
-    API -->|getEvents / simulate get_reserves| RPC
+    UI -->|SWR polling| Reads
+    Reads -->|getEvents / simulate get_reserves| RPC
+    Reads -->|account balances| Horizon[Horizon REST]
 ```
 
 ---
@@ -189,6 +190,33 @@ Requires funded testnet keys:
 STELLAR_ISSUER_SECRET=S... STELLAR_DISTRIBUTOR_SECRET=S... node scripts/deploy.js
 ```
 The script funds accounts via Friendbot, deploys the SAC + pool + bridge, initializes them, and writes real addresses/tx hashes to `deployments/testnet.json`.
+
+### 4. Deploy the frontend to Cloudflare Pages
+The frontend is a **fully static export** (no server runtime — all chain reads happen client-side against public RPC/Horizon), so it deploys as static assets.
+
+```bash
+cd frontend
+npm run build      # output: 'export' → produces frontend/out/
+```
+
+**Cloudflare Pages settings** (Dashboard → Workers & Pages → Create → Pages → Connect to Git → `peach1241/SecureStream`):
+
+| Setting | Value |
+| :--- | :--- |
+| Production branch | `main` |
+| Framework preset | `Next.js (Static HTML Export)` |
+| Build command | `cd frontend && npm install && npm run build` |
+| Build output directory | `frontend/out` |
+
+The contract addresses are baked into [`lib/stellarReads.ts`](frontend/lib/stellarReads.ts) as defaults, so it works with no env config. To override, add `NEXT_PUBLIC_POOL_CONTRACT_ADDRESS`, `NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS`, `NEXT_PUBLIC_SST_ISSUER`, `NEXT_PUBLIC_SOROBAN_RPC_URL`, and `NEXT_PUBLIC_HORIZON_URL` in the Pages **Environment variables** (Production) before building.
+
+CLI alternative:
+```bash
+cd frontend && npm run build
+npx wrangler pages deploy out --project-name securestream
+```
+
+After deploy, update the **Live Demo** link at the top of this README with the real `*.pages.dev` URL.
 
 ---
 

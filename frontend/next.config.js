@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['@stellar/stellar-sdk'],
+  // Fully static export — deployable to Cloudflare Pages (and any static host).
+  output: 'export',
+  images: {
+    unoptimized: true,
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };

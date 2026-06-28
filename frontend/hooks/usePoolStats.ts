@@ -1,12 +1,9 @@
 'use client';
 import useSWR from 'swr';
+import { fetchPoolStats } from '@/lib/stellarReads';
 
 export const usePoolStats = () => {
-  const { data, isLoading, mutate } = useSWR(
-    '/api/pool',
-    (url) => fetch(url).then((res) => res.json()),
-    { refreshInterval: 10000 }
-  );
+  const { data, isLoading, mutate } = useSWR('pool-stats', fetchPoolStats, { refreshInterval: 10000 });
 
   return {
     tvl: data?.tvl || '0',

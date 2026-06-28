@@ -1,10 +1,11 @@
 'use client';
 import useSWR from 'swr';
+import { fetchBalances } from '@/lib/stellarReads';
 
 export const useSSTBalance = (publicKey: string) => {
   const { data, isLoading, mutate } = useSWR(
-    publicKey ? `/api/balance/${publicKey}` : null,
-    (url) => fetch(url).then((res) => res.json()),
+    publicKey ? ['balances', publicKey] : null,
+    ([, pk]: [string, string]) => fetchBalances(pk),
     { refreshInterval: 8000 }
   );
 
