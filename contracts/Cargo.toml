@@ -1,0 +1,11 @@
+[workspace]
+members = ["secure-stream-token", "secure-stream-pool", "secure-stream-bridge"]
+resolver = "2"
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+panic = "abort"
+codegen-units = 1
