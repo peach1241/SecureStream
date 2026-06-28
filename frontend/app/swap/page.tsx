@@ -6,6 +6,7 @@ import { useFreighter } from '@/hooks/useFreighter';
 import { useSSTBalance } from '@/hooks/useSSTBalance';
 import { useSSTPrice } from '@/hooks/useSSTPrice';
 import { displayQuote } from '@/lib/amm';
+import { POOL_CONTRACT, TOKEN_CONTRACT, XLM_CONTRACT, SOROBAN_RPC_URL, NETWORK_PASSPHRASE } from '@/lib/config';
 import { BottomNav } from '@/components/BottomNav';
 
 type TokenDir = 'SST_TO_XLM' | 'XLM_TO_SST';
@@ -49,15 +50,12 @@ export default function SwapPage() {
       const { Contract, nativeToScVal, Address, TransactionBuilder, Horizon, SorobanRpc } = await import('@stellar/stellar-sdk');
       const { signTransaction } = await import('@stellar/freighter-api');
 
-      const rpcUrl = process.env.NEXT_PUBLIC_SOROBAN_RPC_URL || 'https://soroban-testnet.stellar.org';
-      const networkPassphrase = 'Test SDF Network ; September 2015'; // Networks.TESTNET
-      const poolContractId = process.env.NEXT_PUBLIC_POOL_CONTRACT_ADDRESS;
-      const sstTokenId = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS;
-      const xlmTokenId = 'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC'; // native testnet XLM
+      const rpcUrl = SOROBAN_RPC_URL;
+      const networkPassphrase = NETWORK_PASSPHRASE;
+      const poolContractId = POOL_CONTRACT;
+      const sstTokenId = TOKEN_CONTRACT;
+      const xlmTokenId = XLM_CONTRACT;
 
-      if (!poolContractId) throw new Error("Liquidity Pool contract missing from env.");
-      if (!sstTokenId) throw new Error("SST Token contract missing from env.");
-      
       const server = new SorobanRpc.Server(rpcUrl, { allowHttp: true });
       const contract = new Contract(poolContractId);
       const tokenInId = dir === 'SST_TO_XLM' ? sstTokenId : xlmTokenId;

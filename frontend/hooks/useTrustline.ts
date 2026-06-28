@@ -3,10 +3,7 @@ import useSWR from 'swr';
 import { useState } from 'react';
 import { signTransaction } from '@stellar/freighter-api';
 import { fetchBalances } from '@/lib/stellarReads';
-
-const HORIZON_URL = process.env.NEXT_PUBLIC_HORIZON_URL || 'https://horizon-testnet.stellar.org';
-const NETWORK_PASSPHRASE = 'Test SDF Network ; September 2015'; // Networks.TESTNET
-const SST_ISSUER = process.env.NEXT_PUBLIC_SST_ISSUER || '';
+import { HORIZON_URL, NETWORK_PASSPHRASE, SST_ISSUER } from '@/lib/config';
 
 export const useTrustline = (publicKey: string) => {
   const { data, mutate, isLoading } = useSWR(
@@ -32,7 +29,7 @@ export const useTrustline = (publicKey: string) => {
       const account = await server.loadAccount(publicKey);
 
       // 3. Build a changeTrust transaction
-      const sstAsset = new Asset('SST', SST_ISSUER || account.account_id);
+      const sstAsset = new Asset('SST', SST_ISSUER);
       const tx = new TransactionBuilder(account, {
         fee: BASE_FEE,
         networkPassphrase: NETWORK_PASSPHRASE,

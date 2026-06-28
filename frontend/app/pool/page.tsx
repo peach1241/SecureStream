@@ -5,6 +5,7 @@ import { PlusCircle, MinusCircle, Loader2, Droplets } from 'lucide-react';
 import { useFreighter } from '@/hooks/useFreighter';
 import { useSSTBalance } from '@/hooks/useSSTBalance';
 import { usePoolStats } from '@/hooks/usePoolStats';
+import { POOL_CONTRACT, SOROBAN_RPC_URL, NETWORK_PASSPHRASE } from '@/lib/config';
 import { BottomNav } from '@/components/BottomNav';
 
 export default function PoolPage() {
@@ -39,12 +40,10 @@ export default function PoolPage() {
       const { Contract, nativeToScVal, Address, TransactionBuilder, Horizon, SorobanRpc } = await import('@stellar/stellar-sdk');
       const { signTransaction } = await import('@stellar/freighter-api');
 
-      const rpcUrl = process.env.NEXT_PUBLIC_SOROBAN_RPC_URL || 'https://soroban-testnet.stellar.org';
-      const networkPassphrase = 'Test SDF Network ; September 2015'; // Networks.TESTNET
-      const poolContractId = process.env.NEXT_PUBLIC_POOL_CONTRACT_ADDRESS;
+      const rpcUrl = SOROBAN_RPC_URL;
+      const networkPassphrase = NETWORK_PASSPHRASE;
+      const poolContractId = POOL_CONTRACT;
 
-      if (!poolContractId) throw new Error("Pool contract address missing from env.");
-      
       const server = new SorobanRpc.Server(rpcUrl, { allowHttp: true });
       const contract = new Contract(poolContractId);
       
