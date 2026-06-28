@@ -6,7 +6,7 @@
 
 **A constant-product AMM on Stellar Soroban — swap, provide liquidity, and watch live on-chain events.**
 
-![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-blue?logo=githubactions)
+[![CI/CD](https://github.com/peach1241/SecureStream/actions/workflows/ci.yml/badge.svg)](https://github.com/peach1241/SecureStream/actions/workflows/ci.yml)
 [![Stellar](https://img.shields.io/badge/Network-Stellar_Testnet-blue?logo=stellar)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Smart_Contracts-Soroban-purple?logo=rust)](https://soroban.stellar.org)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js_14-black?logo=next.js)](https://nextjs.org)
@@ -14,9 +14,6 @@
 
 **Live Demo:** `PENDING` — the previous `secure-stream.vercel.app` link no longer serves this app; needs a fresh deploy (see [Setup](#-setup-instructions)).
 **Demo Video:** [Watch Walkthrough Demo](./screenshots/demo.gif)
-
-> **CI badge note:** after pushing to GitHub, replace the static badge above with
-> `[![CI/CD](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions)`.
 
 </div>
 
