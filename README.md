@@ -12,7 +12,7 @@
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js_14-black?logo=next.js)](https://nextjs.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**Live Demo:** `PENDING` — the previous `secure-stream.vercel.app` link no longer serves this app; needs a fresh deploy (see [Setup](#-setup-instructions)).
+**Live Demo:** [securestream.take-density-niece.workers.dev](https://securestream.take-density-niece.workers.dev)
 **Demo Video:** [Watch Walkthrough Demo](./screenshots/demo.gif)
 
 </div>
