@@ -1,0 +1,49 @@
+{
+  "network": "testnet",
+  "deployedAt": "2026-06-28T00:00:00.000Z",
+  "note": "Fresh, independent SecureStream deployment. New issuer/distributor keypairs, new SST Stellar Asset Contract, and freshly deployed pool + bridge — no shared/inherited addresses. All hashes are real and verifiable on stellar.expert (testnet).",
+  "issuerPublicKey": "GAEWKVJAQ4IJHS3D3QJZZFJ2EUB6PWLIX4PZRPKHERJJ5KGQU3R7LZCB",
+  "distributorPublicKey": "GD4V2YOZPY4PGTLXQLMEH7RRX6R2NT2HKKEMKQFPUVJSS2HRJHWPG7H2",
+  "tradeableAsset": "SST:GAEWKVJAQ4IJHS3D3QJZZFJ2EUB6PWLIX4PZRPKHERJJ5KGQU3R7LZCB",
+  "xlmContract": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+  "SSTToken": {
+    "label": "SST Token (Stellar Asset Contract)",
+    "contractId": "CCELLZIVJGLIGBPSPW225663T5FPMMZOMYQV62M5XC6R7PAMQF2NP2T2",
+    "deployTxHash": "619dfb45e48f9e90962145deabf03b000eccc92ae5d8bcc0227e9589a62403c9",
+    "initTxHash": "SAC wrappers do not require initialization"
+  },
+  "LiquidityPool": {
+    "contractId": "CAWL62KWM4PYN25BMG7UGZTNGZUO4J7Z4H27DJICRR56CEJEVG5FY2CG",
+    "wasmHash": "84ab36f6fefe6b8d4014f66a4c57d6fba7052a4c4d3f484bc42510ebc58e29a0",
+    "deployTxHash": "0c6b700345912a8c307ecfb7c580b81411450604cecf8e2acec87fa644b1973a",
+    "initTxHash": "b3cf9bb0ae42608193f789949f1a777472b161130a1b8754e66b933f1d246d45"
+  },
+  "Bridge": {
+    "contractId": "CCAFRHHLYRUKGKKEZMGGTNGH33QPZKIINLHAHA7U2TEB7WM5Z4VSLIFG",
+    "wasmHash": "9eb30bbf6faeb94e93ebe3614061dc9fe422cd114c3b8b360509bdcdb1d163a0",
+    "deployTxHash": "782e66193d1898893388dc806fbf383cd03925fdc81e3bf50daf8018a7bb0ac9",
+    "initTxHash": "ee3ef0fbcd7f118cb88f7fd1ff7fa1abb294374a6cebf0ab86e477235175527d"
+  },
+  "interContractCalls": {
+    "add_liquidity": {
+      "description": "pool.add_liquidity invoked SST.transfer + XLM.transfer (two sub-transfers) via env.invoke_contract",
+      "txHash": "d99a639173ab00914648ac78218a680b73c7777611af5df07d860d07d5e4649e",
+      "subTransfers": ["100000.0000000 SST -> pool", "4000.0000000 XLM -> pool"]
+    },
+    "swap": {
+      "description": "pool.swap invoked SST.transfer (in) + XLM.transfer (out) via env.invoke_contract",
+      "txHash": "76f8ba23617b21babe0bb1e095572c3c717914b779fc3276db8d7d0b304cb7e8"
+    },
+    "batch_operation": {
+      "description": "bridge.batch_operation invoked pool.swap (which itself invokes the token) then token.transfer for the service fee — a nested inter-contract call",
+      "txHash": "98e2d6829c6a9049e71c33c4dbe78f936b5019d075c2069b6dee4ed979fc88e0"
+    }
+  },
+  "trustline": {
+    "asset": "SST",
+    "issuer": "GAEWKVJAQ4IJHS3D3QJZZFJ2EUB6PWLIX4PZRPKHERJJ5KGQU3R7LZCB",
+    "limit": "1000000000",
+    "setupTxHash": "185d7fa684773ca148621599fdccc952952831438d07089d76be171b00fc9007",
+    "issueTxHash": "706240732ba7785090323d4d91d50a61f00b6f3ffe1703fd440e73d9ea69ae15"
+  }
+}
